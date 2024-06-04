@@ -1,0 +1,52 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.hero {
+    text-align: center;
+}
+.channel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+.channel span{
+    margin: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}
+.playlist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+.playlist_item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3); 
+}
+.playlist_item img {
+    max-width: 100%;
+    border-radius: 10px;
+    height: auto;
+}
+.playlist_item a, .channel a {
+    text-decoration: none;
+    color: inherit;
+}
+.playlist_item h3 {
+    font-size: 1.1em;
+    margin: 10px;
+}
+.playlist_item p {
+    margin: 10px;
+}
