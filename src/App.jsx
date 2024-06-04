@@ -13,7 +13,7 @@ function App() {
         const fetchPlaylists = async () => {
             try {
                 const allPlaylists = await Promise.all(channels.map(async (channel) => {
-                    const response = await fetch('http://localhost:3000/api/playlists');
+                    const response = await fetch('https://ug-shows-backend-production.up.railway.app/api/playlists');
                     if (!response.ok) {
                         throw new Error('Network response was not ok ' + response.statusText);
                     }
