@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBox from './components/SearchBox';
 import Playlist from './components/Playlist';
 import channels from './data'
+import Trendlist from './components/Trendlist';
 import './App.css'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 
     return (
         <div className="App">
+            <Trendlist trendlistItems={playlists.slice(0, 6)} />
             <div className="hero">
                 <h1>UG SHOWS</h1>
                 <p>A collection of {playlists.length} playlists of Ugandan shows on YouTube from {channels.length} channels</p>
