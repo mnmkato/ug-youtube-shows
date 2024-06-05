@@ -4,13 +4,13 @@ function Playlist({ playlists }) {
     return (
         <div className="playlist">
             {playlists.map(playlist => (
-                <div key={playlist.link} className="playlist_item">
-                    <a href={playlist.link} target="_blank" rel="noopener noreferrer">
-                        <img src={playlist.thumbnail} alt={playlist.title} />
-                        <h3>{playlist.title}</h3>
-                        <p>{playlist.channelTitle}</p>
-                    </a>
-                </div>
+                <a key={playlist.link} className="playlist_item" href={playlist.link} target="_blank" rel="noopener noreferrer">
+                        <div className="image_wrapper">
+                            <img src={playlist.thumbnail} alt={playlist.title} />
+                        </div>
+                        <div className='playlist_title'>{playlist.title}</div>
+                        <div className='playlist_channel_title'>{playlist.channelTitle}</div>    
+                </a>
             ))}
         </div>
     );

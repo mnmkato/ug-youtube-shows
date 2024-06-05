@@ -5,48 +5,71 @@
   text-align: center;
 }
 .hero {
-    text-align: center;
-}
-.channel {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px 0;
+    flex-direction: column;
+    align-items: center;
 }
-.channel span{
-    margin: 5px;
-    border: 1px solid #ccc;
-    padding: 5px;
-    cursor: pointer;
+.search-box {
+    display: flex;
+    width: min-content;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #686e7a;
+    position: relative;
+    color: #686e7a;
+}
+.search-box:hover{
+    border: 1px solid #fff;
+}
+#search-text{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    outline: none;  
+    height: 1.5rem;
+}
+.searchbox-icon {
+    position: absolute;
+    right: 1rem;
 }
 .playlist {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 16px;
+    gap: 16px;
 }
-.playlist_item {
-    border: 1px solid #ccc;
-    border-radius: 10px;
+.playlist_item {    
+    background-color: #434c5e;
+    color: #fff;
+    padding: .75rem;
+    border-radius: 8px;
+}
+.playlist_item:hover{
+    background-color: #4c566a;
+}
+.image_wrapper{
     width: 100%;
-    max-width: 320px;
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3); 
+    aspect-ratio: 16/9;
 }
 .playlist_item img {
-    max-width: 100%;
-    border-radius: 10px;
-    height: auto;
+    border-radius: 8px;
+    height: 100%;
+   width: 100%;
+    object-fit: cover;
 }
-.playlist_item a, .channel a {
-    text-decoration: none;
-    color: inherit;
+.playlist_title {
+    font-weight: 600;
+    text-align: left;
+    color: #E5E9F0;
+    font-size: 14px;
+    margin-top: 0.5rem;
 }
-.playlist_item h3 {
-    font-size: 1.1em;
-    margin: 10px;
-}
-.playlist_item p {
-    margin: 10px;
-}
+.playlist_channel_title {
+    text-align: left;
+    color: #b3b3b3;
+    font-size: 12px;
+} 
