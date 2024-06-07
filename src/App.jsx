@@ -11,6 +11,51 @@ function App() {
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
     const [searchText, setSearchText] = useState("");
 
+    var trendSettings = {
+        dots: true,
+        arrows:false,
+        centerMode: true,
+        infinite: true,
+        centerPadding: "20px",
+        slidesToShow: 1,
+        speed: 500,
+      };
+
+      var recentSettings = {
+        dots: false,
+        arrows:false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        initialSlide: 0,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3.5,
+              slidesToScroll: 3,
+              infinite: false,
+              dots: false
+            }
+          },
+          {
+            breakpoint: 700,
+            settings: {
+              slidesToShow: 2.5,
+              slidesToScroll: 2,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1.2,
+              slidesToScroll: 1,
+            }
+          }
+        ]
+      };
     useEffect(() => {
         const fetchPlaylists = async () => {
             try {
@@ -39,14 +84,22 @@ function App() {
 
     return (
         <div className="App">
-            <Trendlist trendlistItems={playlists.slice(0, 6)} />
-            <div className="hero">
-                <h1>UG SHOWS</h1>
-                <p>A collection of {playlists.length} playlists of Ugandan shows on YouTube from {channels.length} channels</p>
-                <SearchBox onSearch={handleSearch} />
-                {filteredPlaylists.length === 0 && searchText !== "" && <p>No results found</p>}
+            <div className="toolbar">
+                <img src="/ugShows.svg" alt="" srcset="" />
+                 <h3>UG SHOWS</h3>
+                 <SearchBox onSearch={handleSearch} />
             </div>
+            <div className="content">
+           
+            <Trendlist trendlistItems={playlists.slice(0, 6)} settings={trendSettings}/>
+            <div className="recentList">
+                <h3>Recent</h3>
+                <Trendlist trendlistItems={playlists.slice(7, 16)} settings={recentSettings} />
+            </div> 
+            {filteredPlaylists.length === 0 && searchText !== "" && <p>No results found</p>}
+            <p className="hero">UG Shows is a collection of {playlists.length} playlists of Ugandan shows on YouTube from {channels.length} channels</p>
             <Playlist playlists={filteredPlaylists} />
+              </div>
         </div>
     );
 }
