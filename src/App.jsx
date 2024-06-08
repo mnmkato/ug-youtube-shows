@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SearchBox from './components/SearchBox';
 import Playlist from './components/Playlist';
 import channels from './data'
@@ -15,47 +15,55 @@ function App() {
     var trendSettings = {
         dots: true,
         arrows:false,
-        centerMode: true,
         infinite: true,
+        autoplay:true,
+        mobileFirst:true,
+        centerMode: true,
         centerPadding: "20px",
         slidesToShow: 1,
         speed: 500,
       };
 
+      const ref = useRef(null);
       var recentSettings = {
-        dots: false,
-        arrows:false,
         infinite: false,
-        speed: 500,
-        slidesToShow: 4,
+        dots: false,
+        autoplay:true,
+        arrows:true,
+        speed: 1,
+        autoplaySpeed: 1,
+        slidesToShow: 4.5,
         slidesToScroll: 4,
-        initialSlide: 0,
+        initialSlide:0,
         responsive: [
           {
             breakpoint: 1024,
             settings: {
               slidesToShow: 3.5,
               slidesToScroll: 3,
-              infinite: false,
-              dots: false
             }
           },
           {
-            breakpoint: 700,
+            breakpoint: 768,
             settings: {
               slidesToShow: 2.5,
               slidesToScroll: 2,
-              initialSlide: 2
             }
           },
           {
-            breakpoint: 480,
+            breakpoint: 425,
             settings: {
               slidesToShow: 1.2,
               slidesToScroll: 1,
+              arrows:false,
             }
           }
-        ]
+        ],
+        afterChange: (currentSlide) => {
+          if (currentSlide === 0) {
+            ref.current.slickPause();
+          }
+        }
       };
 
     useEffect(() => {
@@ -92,7 +100,7 @@ function App() {
     return (
         <div className="App">
             <div className="toolbar">
-                <img src="/ugShows.svg" alt="" srcset="" />
+                <img src="/ugShows.svg" alt="logo"/>
                  <h3>UG SHOWS</h3>
                  <SearchBox onSearch={handleSearch} />
             </div>
@@ -101,7 +109,7 @@ function App() {
               <Trendlist trendlistItems={playlists.slice(0, 6)} settings={trendSettings}/>
             <div className="recentList">
                 <h3>Recent</h3>
-                <Trendlist trendlistItems={playlists.slice(7, 16)} settings={recentSettings} />
+                <Trendlist trendlistItems={playlists.slice(10, 19)} settings={recentSettings} sliderRef={ref}/>
             </div>
               </div>}
             <p className="hero">UG Shows is a collection of {playlists.length} playlists of Ugandan shows on YouTube from {channels.length} channels</p>
