@@ -10,6 +10,7 @@ function App() {
     const [playlists, setPlaylists] = useState([]);
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const [isSearching, setIsSearching] = useState(false);
 
     var trendSettings = {
         dots: true,
@@ -56,6 +57,7 @@ function App() {
           }
         ]
       };
+
     useEffect(() => {
         const fetchPlaylists = async () => {
             try {
@@ -74,6 +76,11 @@ function App() {
     }, []);
 
     const handleSearch = (text) => {
+      if (text=='') {
+        setIsSearching(false);
+      } else {
+        setIsSearching(true);
+      }
         setSearchText(text);
         const filtered = playlists.filter((playlist) =>
             playlist.title.toLowerCase().includes(text.toLowerCase()) ||
@@ -90,14 +97,15 @@ function App() {
                  <SearchBox onSearch={handleSearch} />
             </div>
             <div className="content">
-           
-            <Trendlist trendlistItems={playlists.slice(0, 6)} settings={trendSettings}/>
+            {!isSearching && <div className="slider-content">
+              <Trendlist trendlistItems={playlists.slice(0, 6)} settings={trendSettings}/>
             <div className="recentList">
                 <h3>Recent</h3>
                 <Trendlist trendlistItems={playlists.slice(7, 16)} settings={recentSettings} />
-            </div> 
-            {filteredPlaylists.length === 0 && searchText !== "" && <p>No results found</p>}
+            </div>
+              </div>}
             <p className="hero">UG Shows is a collection of {playlists.length} playlists of Ugandan shows on YouTube from {channels.length} channels</p>
+            {filteredPlaylists.length === 0 && searchText !== "" && <p>No results found</p>}
             <Playlist playlists={filteredPlaylists} />
               </div>
         </div>
