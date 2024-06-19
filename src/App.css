@@ -14,11 +14,12 @@
     left: 0;
     right: 0;
     z-index: 1000; 
+    height: 2.5rem
 }
 
 .content{
   padding:2rem;
-  padding-top:  6rem ;
+  padding-top:6rem ;
 }
 .trendlist_item {
     position: relative;
