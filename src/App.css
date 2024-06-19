@@ -157,6 +157,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.6em;
+}
+.pagination > .page-button{
+    padding: 0.6em 1.2em;
 }
 .pagination button.active {
     background-color: #007bff;

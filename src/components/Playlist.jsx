@@ -57,10 +57,10 @@ function Playlist({ playlists }) {
                     <NavigateBeforeIcon />
                 </button>
                 {Array.from({ length: totalPages }, (_, index) => (
-                    <button 
+                    <button  
                         key={index + 1} 
                         onClick={() => handlePageChange(index + 1)} 
-                        className={currentPage === index + 1 ? 'active' : ''}
+                        className={currentPage === index + 1 ? 'page-button active' : 'page-button'}
                     >
                         {index + 1}
                     </button>
