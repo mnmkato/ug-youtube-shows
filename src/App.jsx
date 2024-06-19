@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SearchBox from './components/SearchBox';
 import Playlist from './components/Playlist';
-import channels from './data'
 import Trendlist from './components/Trendlist';
 import './App.css'
+import RecentList from './components/RecentList';
 
 function App() {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -11,60 +11,6 @@ function App() {
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [isSearching, setIsSearching] = useState(false);
-
-    var trendSettings = {
-        dots: true,
-        arrows:false,
-        infinite: true,
-        autoplay:true,
-        mobileFirst:true,
-        centerMode: true,
-        centerPadding: "20px",
-        slidesToShow: 1,
-        speed: 500,
-      };
-
-      const ref = useRef(null);
-      var recentSettings = {
-        infinite: false,
-        dots: false,
-        autoplay:true,
-        arrows:true,
-        speed: 1,
-        autoplaySpeed: 1,
-        slidesToShow: 4.5,
-        slidesToScroll: 4,
-        initialSlide:0,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3.5,
-              slidesToScroll: 3,
-            }
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2.5,
-              slidesToScroll: 2,
-            }
-          },
-          {
-            breakpoint: 425,
-            settings: {
-              slidesToShow: 1.2,
-              slidesToScroll: 1,
-              arrows:false,
-            }
-          }
-        ],
-        afterChange: (currentSlide) => {
-          if (currentSlide === 0) {
-            ref.current.slickPause();
-          }
-        }
-      };
 
     useEffect(() => {
         const fetchPlaylists = async () => {
@@ -106,16 +52,23 @@ function App() {
             </div>
             <div className="content">
             {!isSearching && <div className="slider-content">
-              <Trendlist trendlistItems={playlists.slice(0, 6)} settings={trendSettings}/>
+              <Trendlist items={playlists.slice(0, 6)} />
             <div className="recentList">
                 <h3>Recent</h3>
-                <Trendlist trendlistItems={playlists.slice(10, 19)} settings={recentSettings} sliderRef={ref}/>
+                <RecentList items={playlists.slice(10, 19)}/>
             </div>
               </div>}
-            <p className="hero">UG Shows is a collection of {playlists.length} playlists of Ugandan shows on YouTube from {channels.length} channels</p>
-            {filteredPlaylists.length === 0 && searchText !== "" && <p>No results found</p>}
+              <div>
+                {filteredPlaylists.length === playlists.length ? (
+                  <p className="hero">
+                    UG Shows is a collection of {playlists.length} playlists of Ugandan shows on YouTube from various channels
+                  </p>
+                ) : (
+                  searchText !== "" && <p className="hero">{filteredPlaylists.length} results found for "{searchText}"</p>
+                )}
+            </div>
             <Playlist playlists={filteredPlaylists} />
-              </div>
+          </div>
         </div>
     );
 }

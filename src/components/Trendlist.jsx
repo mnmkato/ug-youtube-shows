@@ -3,12 +3,24 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Trendlist({trendlistItems, settings, sliderRef}) {
-    
+function Trendlist({items}) {
+
+    var settings = {
+        dots: true,
+        arrows:false,
+        infinite: true,
+        autoplay:true,
+        mobileFirst:true,
+        centerMode: true,
+        centerPadding: "20px",
+        slidesToShow: 1,
+        speed: 500,
+      };
+
     return(
     <div className="slider-container">
-    <Slider ref={sliderRef} {...settings}>
-    {trendlistItems.map(item => (
+    <Slider {...settings}>
+    {items.map(item => (
             <a key={item.link} className="trendlist_item" href={item.link} target="_blank" rel="noopener noreferrer">
                  <img src={item.thumbnail} alt={item.title} />
                 <div className="trendlist_caption">
@@ -17,7 +29,6 @@ function Trendlist({trendlistItems, settings, sliderRef}) {
                 </div>    
             </a>
         ))}
-
     </Slider>
     </div>)
 }
