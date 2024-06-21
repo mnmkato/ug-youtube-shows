@@ -52,7 +52,7 @@ function RecentList({items}) {
     <Slider ref={ref} {...settings}>
     {items.map(item => (
             <a key={item.link} className="trendlist_item" href={item.link} target="_blank" rel="noopener noreferrer">
-                 <img src={item.thumbnail} alt={item.title} />
+                 <img src={item.thumbnail_maxres ? item.thumbnail_maxres : item.thumbnail_standard} alt={item.title} />
                 <div className="trendlist_caption">
                     <div className='trendlist_title'>{item.title}</div>
                     <div className='trendlist_channel_title'>{item.channelTitle}</div>
