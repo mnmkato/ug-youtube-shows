@@ -5,51 +5,42 @@ import "slick-carousel/slick/slick-theme.css";
 
 function RecentList({items}) {
     
-    const ref = useRef(null);
+    const sliderRef  = useRef(null);
 
     var settings = {
-      infinite: false,
+      infinite: true,
       dots: false,
-      autoplay:true,
-      arrows:true,
+      arrows: false,
       speed: 1,
-      autoplaySpeed: 100,
-      slidesToShow: 4.5,
-      slidesToScroll: 4,
-      initialSlide:0,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      centerMode: true,
       responsive: [
         {
           breakpoint: 2561,
           settings: {
-            slidesToShow: 3.5,
-            slidesToScroll: 1,
+            slidesToShow: 3,
           }
         },
         {
           breakpoint: 768,
           settings: {
-            slidesToShow: 2.5,
-            slidesToScroll: 1,
+            slidesToShow: 2,
           }
         },
         {
           breakpoint: 425,
           settings: {
-            slidesToShow: 1.2,
-            slidesToScroll: 1,
-            arrows:false,
+            slidesToShow: 1,
           }
         }
-      ],
-      afterChange: (currentSlide) => {
-        if (currentSlide === 0) {
-          ref.current.slickPause();
-        }
-      }
+      ]
     };
+    
     return(
     <div className="slider-container">
-    <Slider ref={ref} {...settings}>
+    <Slider ref={sliderRef } {...settings}>
     {items.map(item => (
             <a key={item.link} className="trendlist_item" href={item.link} target="_blank" rel="noopener noreferrer">
                  <img src={item.thumbnail_maxres ? item.thumbnail_maxres : item.thumbnail_standard} alt={item.title} />

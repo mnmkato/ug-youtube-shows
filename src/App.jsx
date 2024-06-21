@@ -55,15 +55,15 @@ function App() {
             </div>
             <div className="content">
                 {isLoading ? (
-                    <div class="loader"></div>
+                    <div className="loader"></div>
                 ) : (
                     <>
                         {!isSearching && (
                             <div className="slider-content">
-                                <Trendlist items={playlists.slice(0, 6)} />
+                                <Trendlist items={playlists.slice(10, 16)} />
                                 <div className="recentList">
                                     <h3>Recent</h3>
-                                    <RecentList items={playlists.slice(10, 19)} />
+                                    <RecentList items={playlists.slice(0,9)} />
                                 </div>
                             </div>
                         )}
