@@ -29,7 +29,7 @@ function Playlist({ playlists }) {
            {currentPlaylists.map(playlist => (
                <a key={playlist.link} className="playlist_item" href={playlist.link} target="_blank" rel="noopener noreferrer">
                    <div className="image_wrapper">
-                       <img src={playlist.thumbnail_maxres ? playlist.thumbnail_maxres : playlist.thumbnail_standard} alt={playlist.title} />
+                       <img src={playlist.thumbnail_high ? playlist.thumbnail_high : playlist.thumbnail_medium} alt={playlist.title} />
                    </div>
                    <div className='playlist_title'>{playlist.title}</div>
                    <div className='playlist_channel_title'>{playlist.channelTitle}</div>
