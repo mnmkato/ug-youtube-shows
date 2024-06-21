@@ -11,7 +11,7 @@ function RecentList({items}) {
       infinite: true,
       dots: false,
       arrows: false,
-      speed: 1,
+      speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
       initialSlide: 0,
