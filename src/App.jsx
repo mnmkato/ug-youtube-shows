@@ -76,7 +76,7 @@ function App() {
                                 searchText !== "" && <p className="hero">{filteredPlaylists.length} results found for "{searchText}"</p>
                             )}
                         </div>
-                        <Playlist playlists={filteredPlaylists} />
+                        <Playlist playlists={filteredPlaylists} searchText={searchText} />
                     </>
                 )}
             </div>
