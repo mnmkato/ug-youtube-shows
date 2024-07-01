@@ -31,7 +31,7 @@ Currently, two official plugins are available:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/mnmkato/ug-youtube-show.git
-   cd ug-youtube-shows` 
+   cd ug-youtube-shows
 2.  **Install dependencies**:
     ```bash
     npm install 
