@@ -209,4 +209,7 @@
     .toolbar h3 {
         display: none;
     }
+.content{
+  padding:1rem;
+}
 }
