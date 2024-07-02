@@ -64,7 +64,11 @@ function App() {
                                 <Trendlist />
                                 <div className="recentList">
                                     <h3>Recent</h3>
-                                    <RecentList items={playlists.slice(0,9)} />
+                                    <RecentList />
+                                </div>
+                                <div className="popularList">
+                                  <h3>Popular</h3>
+                                  <PopularList />
                                 </div>
                             </div>
                         )}
@@ -81,28 +85,6 @@ function App() {
                     </>
                 )}
             </div>
-            {!isSearching && <div className="slider-content">
-            <Trendlist />
-            <div className="recentList">
-                <h3>Recent</h3>
-                <RecentList />
-            </div>
-            <div className="popularList">
-                <h3>Popular</h3>
-                <PopularList />
-            </div>
-              </div>}
-              <div>
-                {filteredPlaylists.length === playlists.length ? (
-                  <p className="hero">
-                    UG Shows is a collection of {playlists.length} playlists of Ugandan shows on YouTube from various channels
-                  </p>
-                ) : (
-                  searchText !== "" && <p className="hero">{filteredPlaylists.length} results found for "{searchText}"</p>
-                )}
-            </div>
-            <Playlist playlists={filteredPlaylists} />
-          </div>
         </div>
     );
 }
