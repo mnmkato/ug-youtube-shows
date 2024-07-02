@@ -4,6 +4,7 @@ import Playlist from './components/Playlist';
 import Trendlist from './components/Trendlist';
 import './App.css'
 import RecentList from './components/RecentList';
+import PopularList from './components/PopularList';
 
 function App() {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -52,10 +53,14 @@ function App() {
             </div>
             <div className="content">
             {!isSearching && <div className="slider-content">
-              <Trendlist items={playlists.slice(0, 6)} />
+            <Trendlist />
             <div className="recentList">
                 <h3>Recent</h3>
                 <RecentList items={playlists.slice(10, 19)}/>
+            </div>
+            <div className="popularList">
+                <h3>Popular</h3>
+                <PopularList />
             </div>
               </div>}
               <div>
