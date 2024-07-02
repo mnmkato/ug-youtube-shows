@@ -1,17 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
-function Playlist({ playlists }) {
+function Playlist({ playlists, searchText }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
+    const playlistRef = useRef(null); // Ref to store reference to playlist div
 
     useEffect(() => {
         setCurrentPage(1);
     }, [playlists]);
 
+    useEffect(() => {
+         // Scroll to top of playlist component on currentPage change
+    }, [currentPage]);
+    const scrollToTop = () => {
+        if (playlistRef.current) {
+            let topOffset;
+            if (searchText !== "") {
+                topOffset = 0;
+            } else {
+                topOffset = playlistRef.current.offsetTop - 2 * 32;
+            }
+            console.log(searchText)
+            window.scrollTo({
+                top: topOffset,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
+        scrollToTop();
     };
 
     const handleItemsPerPageChange = (event) => {
@@ -25,11 +46,11 @@ function Playlist({ playlists }) {
 
     return (
     <>
-        <div className="playlist">
+        <div ref={playlistRef} className="playlist">
            {currentPlaylists.map(playlist => (
                <a key={playlist.link} className="playlist_item" href={playlist.link} target="_blank" rel="noopener noreferrer">
                    <div className="image_wrapper">
-                       <img src={playlist.thumbnail} alt={playlist.title} />
+                       <img src={playlist.thumbnail_high ? playlist.thumbnail_high : playlist.thumbnail_medium} alt={playlist.title} />
                    </div>
                    <div className='playlist_title'>{playlist.title}</div>
                    <div className='playlist_channel_title'>{playlist.channelTitle}</div>
@@ -50,7 +71,7 @@ function Playlist({ playlists }) {
                 {startIndex + 1}-{Math.min(startIndex + itemsPerPage, playlists.length)} of {playlists.length}
             </span>
             <span className="pagination">
-            <button 
+                <button 
                     onClick={() => handlePageChange(currentPage - 1)} 
                     disabled={currentPage === 1}
                 >
