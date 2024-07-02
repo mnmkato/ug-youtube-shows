@@ -26,44 +26,34 @@ function PopularList() {
     const ref = useRef(null);
 
     var settings = {
-      infinite: false,
+      infinite: true,
       dots: false,
-      autoplay:true,
-      arrows:true,
-      speed: 1,
-      autoplaySpeed: 100,
-      slidesToShow: 4.5,
-      slidesToScroll: 4,
-      initialSlide:0,
+      arrows: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      centerMode: true,
       responsive: [
         {
           breakpoint: 2561,
           settings: {
-            slidesToShow: 3.5,
-            slidesToScroll: 1,
+            slidesToShow: 3,
           }
         },
         {
           breakpoint: 768,
           settings: {
-            slidesToShow: 2.5,
-            slidesToScroll: 1,
+            slidesToShow: 2,
           }
         },
         {
           breakpoint: 425,
           settings: {
-            slidesToShow: 1.2,
-            slidesToScroll: 1,
-            arrows:false,
+            slidesToShow: 1,
           }
         }
-      ],
-      afterChange: (currentSlide) => {
-        if (currentSlide === 0) {
-          ref.current.slickPause();
-        }
-      }
+      ]
     };
     return(
     <div className="slider-container">
