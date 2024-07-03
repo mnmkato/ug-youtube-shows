@@ -17,7 +17,8 @@ function App() {
     const [playlistsPopular, setPlaylistsPopular] = useState([]);
     const [playlistsNew, setPlaylistsNew] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -69,6 +70,7 @@ function App() {
                 setPlaylistsNew(playlistsNewData); 
             } catch (error) {
                 console.error('There was a problem fetching data:', error);
+                setError(error.message);
             } finally {
                 setIsLoading(false); // Set loading to false once both fetches are complete or in case of error
             }
@@ -99,9 +101,13 @@ function App() {
                 <SearchBox onSearch={handleSearch} />
             </div>
             <div className="content">
-                {isLoading ? (
-                    <div className="loader"></div>
-                ) : (
+            {isLoading ? (
+                <div className="loader"></div>
+            ) : error ? (
+                <div className="error">
+                    <p>{error}</p>
+                </div>
+            ) : (
                     <>
                         {!isSearching && (
                             <div className="slider-content">
