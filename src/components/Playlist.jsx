@@ -52,8 +52,10 @@ function Playlist({ playlists, searchText }) {
                    <div className="image_wrapper">
                        <img src={playlist.thumbnail_high ? playlist.thumbnail_high : playlist.thumbnail_medium} alt={playlist.title} />
                    </div>
-                   <div className='playlist_title'>{playlist.title}</div>
-                   <div className='playlist_channel_title'>{playlist.channelTitle}</div>
+                   <div className="playlist_caption">
+                    <div className='playlist_title'>{playlist.title}</div>
+                    <div className='playlist_channel_title'>{playlist.channelTitle}</div>
+                   </div>
                </a>
            ))}
            

@@ -63,11 +63,11 @@ function App() {
                             <div className="slider-content">
                                 <Trendlist />
                                 <div className="recentList">
-                                    <h3>Recent</h3>
+                                    <h3>RECENT</h3>
                                     <RecentList />
                                 </div>
                                 <div className="popularList">
-                                  <h3>Popular</h3>
+                                  <h3>POPULAR</h3>
                                   <PopularList />
                                 </div>
                             </div>
