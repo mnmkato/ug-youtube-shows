@@ -78,8 +78,6 @@ function App() {
         fetchData();
     }, []);
     
-    
-
     const handleSearch = (text) => {
         if (text === '') {
             setIsSearching(false);
@@ -119,7 +117,7 @@ function App() {
                                 </div>
                                 <div className="contentList">
                                   <h3>Fresh Additions</h3>
-                                  <ContentList playlists={playlistsPopular} />
+                                  <ContentList playlists={playlistsNew} />
                                 </div>
                             </div>
                         )}
