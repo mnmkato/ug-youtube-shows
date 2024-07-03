@@ -3,25 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Trendlist() {
-    const apiUrl = `${import.meta.env.VITE_API_URL}/trending`;
-    const [playlists, setPlaylists] = useState([]);
-
-    useEffect(() => {
-        const fetchPlaylists = async () => {
-            try {
-                    const response = await fetch(apiUrl);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    const data = await response.json();
-                   setPlaylists(data)
-            } catch (error) {
-                console.error('There was a problem fetching popular playlists:', error);
-            }
-        };
-        fetchPlaylists();
-    }, []);
+function Trendlist({playlists}) {
+    
     var settings = {
         dots: true,
         arrows:false,

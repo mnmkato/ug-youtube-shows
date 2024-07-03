@@ -7,31 +7,63 @@ import RecentList from './components/RecentList';
 import PopularList from './components/PopularList';
 
 function App() {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const [playlists, setPlaylists] = useState([]);
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [isSearching, setIsSearching] = useState(false);
-    const [isLoading, setIsLoading] = useState(true); // Track loading state
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const [playlists, setPlaylists] = useState([]);
+    const [playlistsTrending, setPlaylistsTrending] = useState([]);
+    const [playlistsRecent, setPlaylistsRecent] = useState([]);
+    const [playlistsPopular, setPlaylistsPopular] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    
     useEffect(() => {
-        const fetchPlaylists = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                const [playlistsResponse, playlistsTrendingResponse, playlistsRecentResponse, playlistsPopularResponse] = await Promise.all([
+                    fetch(apiUrl),
+                    fetch(`${apiUrl}/trending`),
+                    fetch(`${apiUrl}/recent`),
+                    fetch(`${apiUrl}/popular`)
+                ]);
+    
+                if (!playlistsResponse.ok) {
+                    throw new Error('Network response was not ok for playlists ' + playlistsResponse.statusText);
                 }
-                const data = await response.json();
-                setPlaylists(data);
-                setFilteredPlaylists(data);
-                setIsLoading(false); // Once data is fetched, set loading to false
+
+                if (!playlistsTrendingResponse.ok) {
+                    throw new Error('Network response was not ok for trending playlists ' + playlistsTrendingResponse.statusText);
+                }
+    
+                if (!playlistsRecentResponse.ok) {
+                    throw new Error('Network response was not ok for recent playlists ' + playlistsRecentResponse.statusText);
+                }
+
+                if (!playlistsPopularResponse.ok) {
+                    throw new Error('Network response was not ok for popular playlists ' + playlistsPopularResponse.statusText);
+                }
+                const playlistsData = await playlistsResponse.json();
+                const playlistsTrendingData = await playlistsTrendingResponse.json();
+                const playlistsRecentData = await playlistsRecentResponse.json();
+                const playlistsPopularData = await playlistsPopularResponse.json();
+    
+                setPlaylists(playlistsData);
+                setFilteredPlaylists(playlistsData);
+                setPlaylistsTrending(playlistsTrendingData);
+                setPlaylistsRecent(playlistsRecentData);
+                setPlaylistsPopular(playlistsPopularData);
+               
             } catch (error) {
-                console.error('There was a problem:', error);
-                setIsLoading(false); // Set loading to false in case of error
+                console.error('There was a problem fetching data:', error);
+            } finally {
+                setIsLoading(false); // Set loading to false once both fetches are complete or in case of error
             }
         };
-        fetchPlaylists();
+    
+        fetchData();
     }, []);
+    
 
     const handleSearch = (text) => {
         if (text === '') {
@@ -61,14 +93,14 @@ function App() {
                     <>
                         {!isSearching && (
                             <div className="slider-content">
-                                <Trendlist />
+                                <Trendlist playlists={playlistsTrending}/>
                                 <div className="recentList">
                                     <h3>RECENT</h3>
-                                    <RecentList />
+                                    <RecentList playlists={playlistsRecent} />
                                 </div>
                                 <div className="popularList">
                                   <h3>POPULAR</h3>
-                                  <PopularList />
+                                  <PopularList playlists={playlistsPopular} />
                                 </div>
                             </div>
                         )}
