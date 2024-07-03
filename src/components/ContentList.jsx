@@ -1,9 +1,9 @@
-import React, {useEffect,useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function RecentList({playlists}) {
+function ContentList({playlists}) {
 
     const ref = useRef(null);
 
@@ -43,7 +43,17 @@ function RecentList({playlists}) {
     <Slider ref={ref} {...settings}>
     {playlists.map(item => (
             <a key={item.link} className="trendlist_item" href={item.link} target="_blank" rel="noopener noreferrer">
-                 <img src={item.thumbnail_maxres ? item.thumbnail_maxres : item.thumbnail_standard} alt={item.title} />
+                 <img src={
+                          item.thumbnail_maxres 
+                          ? item.thumbnail_maxres 
+                          : item.thumbnail_standard 
+                          ? item.thumbnail_standard 
+                          : item.thumbnail_high 
+                          ? item.thumbnail_high 
+                          : item.thumbnail_medium 
+                          ? item.thumbnail_medium 
+                          : item.thumbnail_default
+                      } alt={item.title} />
                 <div className="trendlist_caption">
                     <div className='trendlist_title'>{item.title}</div>
                     <div className='trendlist_channel_title'>{item.channelTitle}</div>
@@ -55,4 +65,4 @@ function RecentList({playlists}) {
     </div>)
 }
 
-export default RecentList
+export default ContentList
