@@ -4,7 +4,6 @@ import Playlist from './components/Playlist';
 import Trendlist from './components/Trendlist';
 import './App.css';
 import ContentList from './components/ContentList';
-import PopularList from './components/PopularList';
 
 function App() {
     const [filteredPlaylists, setFilteredPlaylists] = useState([]);
