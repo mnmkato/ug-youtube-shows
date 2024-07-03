@@ -88,10 +88,9 @@
     font-size: 12px;
 }
 
-.recentList .popularList{
+.recentList, .popularList{
     text-align: left;
     padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 .hero {
     display: flex;
@@ -134,12 +133,12 @@
     gap: 16px;
 }
 .playlist_item {    
-    background-color: #2d2d2d;
+    background-color: #303030;
     color: #fff;
     border-radius: 8px;
 }
 .playlist_item:hover{
-    background-color: #3d3d3d;
+    background-color: #4d4d4d;
 }
 .image_wrapper{
     width: 100%;
