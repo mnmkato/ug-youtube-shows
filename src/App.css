@@ -48,6 +48,7 @@
     width:100%;
     aspect-ratio: 16/9;
     min-height: 195px;
+    margin-top: 8px;
 }
 .slick-dots li.slick-active button:before {
     color: white;
