@@ -21,11 +21,11 @@ function Trendlist({playlists}) {
     <div className="slider-container">
     <Slider {...settings}>
     {playlists.map(item => (
-            <a key={item.link} className="trendlist_item" href={item.link} target="_blank" rel="noopener noreferrer">
+            <a key={item.link} className="trendlist list_item" href={item.link} target="_blank" rel="noopener noreferrer">
                  <img src={item.thumbnail_maxres ? item.thumbnail_maxres : item.thumbnail_standard}alt={item.title} />
-                <div className="trendlist_caption">
-                    <div className='trendlist_title'>{item.title}</div>
-                    <div className='trendlist_channel_title'>{item.channelTitle}</div>
+                <div className="list_caption">
+                    <div className='list_title'>{item.title}</div>
+                    <div className='list_channel_title'>{item.channelTitle}</div>
                 </div>    
             </a>
         ))}

@@ -1,9 +1,27 @@
-import React, { useRef } from 'react';
+import React, {useEffect, useState, useRef } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function ContentList({playlists}) {
+function PopularList() {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/popular`;
+    const [playlists, setPlaylists] = useState([]);
+
+    useEffect(() => {
+        const fetchPlaylists = async () => {
+            try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    const data = await response.json();
+                   setPlaylists(data)
+            } catch (error) {
+                console.error('There was a problem fetching popular playlists:', error);
+            }
+        };
+        fetchPlaylists();
+    }, []);
 
     const ref = useRef(null);
 
@@ -37,23 +55,12 @@ function ContentList({playlists}) {
         }
       ]
     };
-    
     return(
     <div className="slider-container">
     <Slider ref={ref} {...settings}>
     {playlists.map(item => (
-            <a key={item.link} className="ist_item" href={item.link} target="_blank" rel="noopener noreferrer">
-                 <img src={
-                          item.thumbnail_maxres 
-                          ? item.thumbnail_maxres 
-                          : item.thumbnail_standard 
-                          ? item.thumbnail_standard 
-                          : item.thumbnail_high 
-                          ? item.thumbnail_high 
-                          : item.thumbnail_medium 
-                          ? item.thumbnail_medium 
-                          : item.thumbnail_default
-                      } alt={item.title} />
+            <a key={item.link} className="list_item" href={item.link} target="_blank" rel="noopener noreferrer">
+                 <img src={item.thumbnail_maxres ? item.thumbnail_maxres : item.thumbnail_high} alt={item.title} />
                 <div className="list_caption">
                     <div className='list_title'>{item.title}</div>
                     <div className='list_channel_title'>{item.channelTitle}</div>
@@ -65,4 +72,4 @@ function ContentList({playlists}) {
     </div>)
 }
 
-export default ContentList
+export default PopularList
