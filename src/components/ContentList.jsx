@@ -42,7 +42,7 @@ function ContentList({playlists}) {
     <div className="slider-container">
     <Slider ref={ref} {...settings}>
     {playlists.map(item => (
-            <a key={item.link} className="ist_item" href={item.link} target="_blank" rel="noopener noreferrer">
+            <a key={item.link} className="list_item" href={item.link} target="_blank" rel="noopener noreferrer">
                  <img src={
                           item.thumbnail_maxres 
                           ? item.thumbnail_maxres 
